@@ -1,0 +1,45 @@
+
+{
+"experiment_name": "model_v1",
+"experiment_date": "2024-09-01",
+"description": "Initial Classification Decision Tree",
+  "data_provenance": {
+    "data_source": "Titanic Dataset",
+    "data_version": "2024-09-31",
+    "preprocessing_steps": [
+        "Missing values imputed with mode",
+        "Categorical features one-hot encoded"
+    ]
+},
+
+"code_version": {
+    "commit_hash": ""
+},
+
+"model_parameters": {
+    "hyperparameters": {
+        "max_depth": 3
+    }
+},
+
+"training_details": {
+    "training_duration": "0.3010091781616211 seconds"
+},
+
+"evaluation_metrics": {
+    "cross_val_score, 5 folds": "[0.83663366 0.82673267 0.79207921 0.81188119 0.80597015]",
+    "Kaggle Score": "Private: 0.771 , Public: 0.882 "
+},
+
+"experiment_results": {
+    "key_findings": "Model performed best with a max_depth of 3. Using O(1) entropy trick cut training time in half. Using radix sort did not improve training time.",
+    "recommendations": "Consider Using subset selection for categorical features and implementing a tree functionality to handle missing values based on current node."
+},
+
+
+"artifacts_and_outputs": {
+  "model_files": [
+    "models/model_v1/model_v1.pkl"
+  ]
+}
+}

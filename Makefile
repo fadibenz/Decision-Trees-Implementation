@@ -5,6 +5,8 @@
 PROJECT_NAME = Decision-Trees-Implementation
 PYTHON_VERSION = 3.10
 PYTHON_INTERPRETER = python
+ENV_NAME = CART-Decision-Tree
+PYTHON = conda run -n $(ENV_NAME) python
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -14,10 +16,7 @@ PYTHON_INTERPRETER = python
 ## Install Python Dependencies
 .PHONY: requirements
 requirements:
-	conda env update --name $(PROJECT_NAME) --file environment.yml --prune
-	
-
-
+	conda env update --name $(ENV_NAME) --file environment.yml --prune
 
 ## Delete all compiled Python files
 .PHONY: clean
@@ -28,32 +27,37 @@ clean:
 ## Lint using flake8 and black (use `make format` to do formatting)
 .PHONY: lint
 lint:
-	flake8 CART-Decision-Tree
-	isort --check --diff --profile black CART-Decision-Tree
-	black --check --config pyproject.toml CART-Decision-Tree
+	flake8 CART_Decision_Tree
+	isort --check --diff --profile black CART_Decision_Tree
+	black --check --config pyproject.toml CART_Decision_Tree
 
 ## Format source code with black
 .PHONY: format
 format:
-	black --config pyproject.toml CART-Decision-Tree
-
-
-
+	black --config pyproject.toml CART_Decision_Tree
 
 ## Set up python interpreter environment
 .PHONY: create_environment
 create_environment:
-	conda env create --name $(PROJECT_NAME) -f environment.yml
-	
-	@echo ">>> conda env created. Activate with:\nconda activate $(PROJECT_NAME)"
-	
+	conda env create --name $(ENV_NAME) -f environment.yml
 
-
+	@echo ">>> conda env created. Activate with:\nconda activate $(ENV_NAME)"
 
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
 
+# Train the model
+.PHONY: train
+train:
+	@echo "Training the model..."
+	$(PYTHON) CART_Decision_Tree/modeling/train.py
+
+# Predict using the model
+.PHONY: predict
+predict:
+	@echo "Predicting..."
+	$(PYTHON) CART_Decision_Tree/modeling/predict.py
 
 
 #################################################################################
