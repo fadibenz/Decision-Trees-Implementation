@@ -60,6 +60,16 @@ predict:
 	$(PYTHON) CART_Decision_Tree/modeling/predict.py
 
 
+.PHONY: search
+search:
+	@echo "searching..."
+	$(PYTHON) CART_Decision_Tree/modeling/GridSearch.py
+
+
+.PHONY: plot
+plot:
+	@echo "plotting..."
+	$(PYTHON) CART_Decision_Tree/plots.py
 #################################################################################
 # Self Documenting Commands                                                     #
 #################################################################################

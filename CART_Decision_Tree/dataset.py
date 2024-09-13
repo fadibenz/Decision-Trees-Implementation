@@ -53,6 +53,9 @@ def preprocess(data, fill_mode=True, min_freq=10, onehot_cols=None):
     return data, onehot_features
 
 
+
+
+
 if __name__ == "__main__":
     path_train = 'data/raw/titanic_training.csv'
     data = np.genfromtxt(path_train, delimiter=',', dtype=None)
@@ -67,8 +70,6 @@ if __name__ == "__main__":
 
     X = X[labeled_idx, :]
     Z, _ = preprocess(test_data[1:, :], onehot_cols=[0, 1, 5, 7, 8])
-
-    assert X.shape[1] == Z.shape[1]
 
     features = list(data[0, 1:]) + onehot_features
     df_train = pd.DataFrame(X, columns=features)

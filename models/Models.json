@@ -1,45 +1,90 @@
-
 {
-"experiment_name": "model_v1",
-"experiment_date": "2024-09-01",
-"description": "Initial Classification Decision Tree",
-  "data_provenance": {
-    "data_source": "Titanic Dataset",
-    "data_version": "2024-09-31",
-    "preprocessing_steps": [
-        "Missing values imputed with mode",
-        "Categorical features one-hot encoded"
-    ]
-},
+      "model_1":{
+        "experiment_name": "model_v1",
+        "experiment_date": "2024-09-01",
+        "description": "Initial Classification Decision Tree",
+        "data_provenance": {
+          "data_source": "Titanic Dataset",
+          "data_version": "2024-09-31",
+          "preprocessing_steps": [
+            "Missing values imputed with mode",
+            "Categorical features one-hot encoded"
+          ]
+        },
 
-"code_version": {
-    "commit_hash": ""
-},
+        "code_version": {
+          "commit_hash": "3ffd9a72"
+        },
 
-"model_parameters": {
-    "hyperparameters": {
-        "max_depth": 3
+        "model_parameters": {
+          "hyperparameters": {
+            "max_depth": 3
+          }
+        },
+
+        "training_details": {
+          "training_duration": "0.3010091781616211 seconds"
+        },
+
+        "evaluation_metrics": {
+          "cross_val_score, 5 folds": "[0.83663366 0.82673267 0.79207921 0.81188119 0.80597015]",
+          "Kaggle Score": "Private: 0.771 , Public: 0.833 "
+        },
+
+        "experiment_results": {
+          "key_findings": "Model performed best with a max_depth of 3. Using O(1) entropy trick cut training time in half. Using radix sort did not improve training time.",
+          "recommendations": "Consider Using subset selection for categorical features and implementing a tree functionality to handle missing values based on current node."
+        },
+
+
+        "artifacts_and_outputs": {
+          "model_files": [
+            "models/model_v1/model_v1.pkl"
+          ]
+        }
+    },
+  "model_2": {
+    "experiment_name": "model_v2",
+    "experiment_date": "2024-09-01",
+    "description": "A random forest of a Classification Decision Tree with node-specific imputation and subset selection for categorical features",
+    "data_provenance": {
+      "data_source": "Titanic Dataset",
+      "data_version": "2024-09-31",
+      "preprocessing_steps": [
+        "Removing features that are not used",
+        "Replacing missing values with -1"
+      ]
+    },
+
+    "code_version": {
+      "commit_hash": ""
+    },
+
+    "model_parameters": {
+      "hyperparameters": {
+        "params" :{
+          "max_depth": 12
+        },
+        "n": 300,
+        "m": 3
+      }
+    },
+
+    "evaluation_metrics": {
+      "cross_val_score, 5 folds": "[0.81683168 0.82178218 0.8019802  0.80693069 0.7761194 ]",
+      "Kaggle Score": "Private: 0.790 , Public: 0.844 "
+    },
+
+    "experiment_results": {
+      "key_findings": "The Model is more powerful now when dealing with categorical features and missing values, similar to CART. The performance did not change much. Node-specific imputation helped with deep trees. This method is more computationally expensive due to the number of decision trees",
+      "recommendations": "Consider feature engineering. Look into potential performance optimization like: Train the trees in parallel by importing multiprocessing library and call mp.Pool and pool.apply_async. "
+    },
+
+
+    "artifacts_and_outputs": {
+      "model_files": [
+        "models/model_v2/model_v2.pkl"
+      ]
     }
-},
-
-"training_details": {
-    "training_duration": "0.3010091781616211 seconds"
-},
-
-"evaluation_metrics": {
-    "cross_val_score, 5 folds": "[0.83663366 0.82673267 0.79207921 0.81188119 0.80597015]",
-    "Kaggle Score": "Private: 0.771 , Public: 0.882 "
-},
-
-"experiment_results": {
-    "key_findings": "Model performed best with a max_depth of 3. Using O(1) entropy trick cut training time in half. Using radix sort did not improve training time.",
-    "recommendations": "Consider Using subset selection for categorical features and implementing a tree functionality to handle missing values based on current node."
-},
-
-
-"artifacts_and_outputs": {
-  "model_files": [
-    "models/model_v1/model_v1.pkl"
-  ]
-}
+  }
 }
